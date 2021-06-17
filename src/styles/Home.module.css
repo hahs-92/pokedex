@@ -46,6 +46,7 @@
 .Main {
     grid-area: 3 / 1 / 4 / 2;
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
 }
 
@@ -55,4 +56,12 @@
     grid-auto-rows: auto;
     grid-gap: 20px;
     width: 90%;
+}
+
+.Main_NextPage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 80px;
 }
