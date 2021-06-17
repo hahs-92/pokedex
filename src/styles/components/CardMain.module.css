@@ -1,6 +1,7 @@
 .CardMain {
     height: 320px;
-    box-shadow: 4px 5px 11px #80808054;
+    box-shadow: var(--shadow);
+    border-radius: 5px;
 }
 
 .Imagen {

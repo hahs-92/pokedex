@@ -1,16 +1,13 @@
 //ESTILOS
 import styles from '../styles/Home.module.css'
 //COMPONENTS
+import Header from '../components/Header'
 import CardMain from '../components/CardMain'
 
 const Home = () => {
     return(
         <section className={ styles.Home }>
-            <section className={ styles.Header }>
-                <header className={ styles.Header_wrapper }>
-                    <h1>Pokedex</h1>
-                </header>
-            </section>
+            <Header />
 
             <section className={ styles.Search }>
                 <div className={ styles.Search_wrapper }>

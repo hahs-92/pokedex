@@ -1,0 +1,24 @@
+.CardDetail {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    max-width: 450px;
+    box-shadow: var(--shadow);
+}
+
+.CardDetail_wrapper {
+    width: 90%;
+}
+
+.Imagen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 120px;
+}

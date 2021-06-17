@@ -5,6 +5,9 @@
     --green: #80b42d;
     --white: #fafafa;
 
+    /* SHADOWS */
+    --shadow: 4px 5px 11px #80808054;
+
     /* FONTS */
     --fontFamily: 'Raleway', sans-serif;
 
