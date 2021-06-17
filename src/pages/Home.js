@@ -1,5 +1,7 @@
 //ESTILOS
 import styles from '../styles/Home.module.css'
+//COMPONENTS
+import CardMain from '../components/CardMain'
 
 const Home = () => {
     return(
@@ -18,7 +20,15 @@ const Home = () => {
             </section>
 
             <main className={ styles.Main }>
-
+                <section className={ styles.Main_wrapper }>
+                    <CardMain />
+                    <CardMain />
+                    <CardMain />
+                    <CardMain />
+                    <CardMain />
+                    <CardMain />
+                    <CardMain />
+                </section>
             </main>
         </section>
     )
