@@ -1,6 +1,5 @@
 //ESTILOS
 import styles from '../styles/components/CardDetail.module.css'
-
 const CardDetail = (props) => {
     return(
         <article className={ styles.CardDetail }>
@@ -16,7 +15,7 @@ const CardDetail = (props) => {
                         {
                             props.types && 
                                 props.types.map(item => (
-                                    <span key={ item }>{ item }  </span>
+                                    <span key={ item.type.name }>{ item.type.name }  </span>
                                 ))
                         }
                     </h2>
@@ -24,7 +23,7 @@ const CardDetail = (props) => {
                         {
                             props.abilities && 
                                 props.abilities.map(item => (
-                                    <span key={ item }>{ item }  </span>
+                                    <span key={ item.ability.name }>{ item.ability.name }  </span>
                                 ))
                         }
                     </h2>

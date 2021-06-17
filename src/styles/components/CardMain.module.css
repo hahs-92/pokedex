@@ -38,6 +38,7 @@
     color: var(--white);
 }
 
+
 @keyframes fadeIn {
     from {
         opacity: 0;

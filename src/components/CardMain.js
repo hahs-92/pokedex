@@ -8,9 +8,10 @@ import imgError from '../assets/error.svg'
 import Loader from '../components/Loader'
 //HOOKS
 import { useIntersectionObserver } from '../hooks/useIntersectionOberver'
+//UTILS
+import { getDataByName } from '../utils/getData'
 
 const CardMain = ({ name }) => {
-    const BASEURL = "https://pokeapi.co/api/v2/"
     let history = useHistory()
     const element = useRef(null)
     const [ imgPokemon, setImgPokemon ] = useState('')
@@ -22,9 +23,8 @@ const CardMain = ({ name }) => {
         setIsLoading(true)
         try {   
             if(!show) return false  
-            const data = await fetch(`${ BASEURL }pokemon/${ name }`)
-            const response = await data.json()
-            setImgPokemon( response.sprites.other["official-artwork"].front_default)
+            const data = await getDataByName(name)
+            setImgPokemon( data.sprites.other["official-artwork"].front_default)
             setIsLoading(false)
             setError(false)
         } catch (error) {
@@ -34,6 +34,7 @@ const CardMain = ({ name }) => {
     }
 
     const handleOnClick = () => {
+        if(isError) return false
         history.push(`/Pokemon/${ name }`)
     }
 
@@ -62,7 +63,11 @@ const CardMain = ({ name }) => {
                                             <h2>{ name }</h2>
                                         </section> 
                                     </>
-                                    : <img src={ imgError } alt="notfound" style={ { width:"100%", height:"100%"}}/>
+                                    : 
+                                    <section className={ styles.Error }>
+                                        <img src={ imgError } alt="notfound" style={ { width:"100%", height:"100%"}}/>
+                                        <h1>Something was wrong¡¡</h1>
+                                    </section>
                                 }        
                             </>
                         : <Loader />  

@@ -4,21 +4,20 @@ import styles from '../styles/Home.module.css'
 //COMPONENTS
 import Header from '../components/Header'
 import CardMain from '../components/CardMain'
+//UTILS
+import { getData } from '../utils/getData'
 
 const Home = () => {
-    const BASEURL = "https://pokeapi.co/api/v2/"
-    const LIMIT = 10
     const [ pokemon, setPokemon ] = useState([])
     const [ page, setPage ] = useState(0)
     const [ filter, setFilter ] = useState('')
     const [ notFound, setNotFound ] = useState(false)
     const [ isError, setIsError ] = useState(false)
 
-    const getData = async() => {
+    const getPokemons = async() => {
         try {
-            const data = await fetch(`${ BASEURL }pokemon?limit=${ LIMIT }&offset=${ page * LIMIT}`)
-            const response = await data.json()
-            const newData = [...pokemon, ...response.results]
+            const data = await getData(page)
+            const newData = [...pokemon, ...data.results]
             setPokemon(newData)
             setIsError(false)
         } catch (error) {
@@ -38,14 +37,13 @@ const Home = () => {
     const handleSearch = () => {
         if(!filter){
             setNotFound(true)
-            return false
         }
         setPokemon([{ name: filter }])
         setNotFound(false)
     }
 
     useEffect(() => {
-        getData() // eslint-disable-next-line
+        getPokemons() // eslint-disable-next-line
     },[page])
 
     return(
