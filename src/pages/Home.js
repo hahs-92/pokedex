@@ -67,7 +67,6 @@ const Home = () => {
                     isError
                     ?   <h1>Something was wrong¡¡</h1>
                     :
-                        <>
                         <section className={ styles.Main_wrapper }>
                             {
                                 pokemon.length > 0 &&
@@ -76,15 +75,14 @@ const Home = () => {
                                     ))
                             }
                         </section>
-                        <section className={ styles.Main_NextPage }>
-                            {
-                                pokemon.length > 1 &&
-                                    <button type='button' onClick={ handleNextPage }>View more</button>
-                            }
-                        </section>
-                        </>
                 }      
             </main>
+            <section className={ styles.Main_NextPage }>
+                {
+                    pokemon.length > 1 &&
+                        <button type='button' aria-label='button-next' onClick={ handleNextPage }>View more</button>
+                }
+            </section>
         </section>
     )
 }
