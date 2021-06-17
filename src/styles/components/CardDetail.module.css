@@ -19,6 +19,10 @@
     height: 60%;
 }
 
+.Imagen img {
+    width: 60%;
+}
+
 .Content {
     display: flex;
     flex-direction: column;

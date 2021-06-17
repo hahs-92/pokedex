@@ -1,8 +1,10 @@
+import { useHistory } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 //ESTILOS
 import styles from '../styles/components/CardMain.module.css'
 
 const CardMain = ({ name }) => {
+    let history = useHistory()
     const [ imgPokemon, setImgPokemon ] = useState('')
     const BASEURL = "https://pokeapi.co/api/v2/"
 
@@ -16,9 +18,12 @@ const CardMain = ({ name }) => {
         }
     }
 
+    const handleOnClick = () => {
+        history.push(`/Pokemon/${ name }`)
+    }
+
     useEffect(() => {
-        // eslint-disable-next-line
-        getImgPokemon()
+        getImgPokemon() // eslint-disable-next-line
     }, [])
 
     return(
@@ -26,7 +31,7 @@ const CardMain = ({ name }) => {
             {
                 imgPokemon 
                 ?
-                <article className={ styles.CardMain }>
+                <article className={ styles.CardMain } onClick={ handleOnClick }>
                     <section className={ styles.Imagen }>
                         <img src={ imgPokemon } alt={ `pokemon ${ name }`} />
                     </section>

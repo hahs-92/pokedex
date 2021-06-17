@@ -37,8 +37,7 @@ const Home = () => {
     }
 
     useEffect(() => {
-        // eslint-disable-next-line
-        getData()
+        getData() // eslint-disable-next-line
     },[page])
 
     return(

@@ -20,7 +20,10 @@
     width: 100%;
 }
 
-.Button button {
+.Button a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 120px;
     height: 40px;
     border: none;
@@ -29,6 +32,8 @@
     color: var(--white);
     font-family: var(--fontFamily);
     font-size: 1.6rem;
+    text-decoration: none;
+    cursor: pointer;
 }
 
 .Content {
