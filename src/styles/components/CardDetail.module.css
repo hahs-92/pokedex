@@ -3,7 +3,7 @@
     justify-content: center;
     width: 100%;
     max-width: 450px;
-    max-height: 400px;
+    height: 400px;
     box-shadow: var(--shadow);
 }
 
@@ -20,7 +20,8 @@
 }
 
 .Imagen img {
-    width: 60%;
+    width: 80%;
+    max-width: 230px;
 }
 
 .Content {

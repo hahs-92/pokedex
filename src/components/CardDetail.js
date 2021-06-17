@@ -2,8 +2,6 @@
 import styles from '../styles/components/CardDetail.module.css'
 
 const CardDetail = (props) => {
-    console.log("ability ", props.abilities)
-
     return(
         <article className={ styles.CardDetail }>
             <div className={ styles.CardDetail_wrapper }>
@@ -12,8 +10,8 @@ const CardDetail = (props) => {
                 </section>
 
                 <section className={ styles.Content }>
-                    <h2>Id: <strong>{ props.id }</strong></h2>
-                    <h2>Name: <strong>{ props.name }</strong></h2>
+                    <h2><strong>Id: </strong>{ props.id }</h2>
+                    <h2><strong>Name: </strong>{ props.name }</h2>
                     <h2><strong>Types: </strong>
                         {
                             props.types && 

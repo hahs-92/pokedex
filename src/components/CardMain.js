@@ -1,18 +1,26 @@
 import { useHistory } from 'react-router-dom'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 //ESTILOS
 import styles from '../styles/components/CardMain.module.css'
+//HOOKS
+import { useIntersectionObserver } from '../hooks/useIntersectionOberver'
 
 const CardMain = ({ name }) => {
+    const BASEURL = "https://pokeapi.co/api/v2/"
     let history = useHistory()
     const [ imgPokemon, setImgPokemon ] = useState('')
-    const BASEURL = "https://pokeapi.co/api/v2/"
+    const [ isLoading, setIsLoading ] = useState(false)
+    const element = useRef(null)
+    const { show } = useIntersectionObserver(element)
 
     const getImgPokemon = async() => {
-        try {     
+        setIsLoading(true)
+        try {   
+            if(!show) return false  
             const data = await fetch(`${ BASEURL }pokemon/${ name }`)
             const response = await data.json()
             setImgPokemon( response.sprites.other["official-artwork"].front_default)
+            setIsLoading(false)
         } catch (error) {
             console.log(error.message)
         }
@@ -24,27 +32,31 @@ const CardMain = ({ name }) => {
 
     useEffect(() => {
         getImgPokemon() // eslint-disable-next-line
-    }, [])
+    }, [ show ])
 
     return(
-        <>
+        <article className={ styles.CardMain } onClick={ handleOnClick } ref={ element }>
             {
-                imgPokemon 
-                ?
-                <article className={ styles.CardMain } onClick={ handleOnClick }>
-                    <section className={ styles.Imagen }>
-                        <img src={ imgPokemon } alt={ `pokemon ${ name }`} />
-                    </section>
+                show &&
+                <>
+                    {
+                        isLoading 
+                        ? <h1>Loading...</h1>
+                        : 
+                            <>
+                                <section className={ styles.Imagen }>
+                                    <img src={ imgPokemon } alt={ `pokemon ${ name }`} />
+                                </section>
 
-                    <section className={ styles.Title }>
-                        <h2>{ name }</h2>
-                    </section>
-                </article>
-                :
-                <h1>Not Results</h1>
+                                <section className={ styles.Title }>
+                                    <h2>{ name }</h2>
+                                </section>
+                            </>
+
+                    }
+                </>
             }
-        </>
-        
+        </article>  
     )
 }
 

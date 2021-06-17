@@ -11,6 +11,7 @@ const Home = () => {
     const [ pokemon, setPokemon ] = useState([])
     const [ page, setPage ] = useState(0)
     const [ filter, setFilter ] = useState('')
+    const [ notFound, setNotFound ] = useState(false)
 
     const getData = async() => {
         try {
@@ -32,8 +33,12 @@ const Home = () => {
     }
 
     const handleSearch = () => {
-        if(!filter) return false
+        if(!filter){
+            setNotFound(true)
+            return false
+        }
         setPokemon([{ name: filter }])
+        setNotFound(false)
     }
 
     useEffect(() => {
@@ -49,9 +54,14 @@ const Home = () => {
                     <input className={ styles.Input } onChange={ handleOnChange } type="text" placeholder='Search by name' />
                     <input className={ styles.Button } onClick={ handleSearch } type="button" value='Search' />
                 </div>
+                { notFound &&
+                    <div className={ styles.Alert }>
+                        <h3>Enter a name, please¡¡</h3>
+                    </div>
+                }
             </section>
 
-            <main className={ styles.Main }>
+            <main className={ styles.Main }>         
                 <section className={ styles.Main_wrapper }>
                     {
                         pokemon.length > 0 &&
@@ -60,7 +70,6 @@ const Home = () => {
                             ))
                     }
                 </section>
-
                 <section className={ styles.Main_NextPage }>
                     {
                         pokemon.length > 1 &&

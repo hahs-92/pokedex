@@ -10,6 +10,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    align-items: flex-start;
     width: 90%;
 }
 
@@ -40,4 +41,12 @@
     width: 100%;
     display: flex;
     justify-content: center;
+}
+
+.Content h2 {
+    font-weight: 500;
+}
+
+.Content h2 strong {
+    font-weight: 700;
 }
