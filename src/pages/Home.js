@@ -12,6 +12,7 @@ const Home = () => {
     const [ page, setPage ] = useState(0)
     const [ filter, setFilter ] = useState('')
     const [ notFound, setNotFound ] = useState(false)
+    const [ isError, setIsError ] = useState(false)
 
     const getData = async() => {
         try {
@@ -19,8 +20,10 @@ const Home = () => {
             const response = await data.json()
             const newData = [...pokemon, ...response.results]
             setPokemon(newData)
+            setIsError(false)
         } catch (error) {
             console.log(error.message)
+            setIsError(true)
         }
     }
 
@@ -61,21 +64,28 @@ const Home = () => {
                 }
             </section>
 
-            <main className={ styles.Main }>         
-                <section className={ styles.Main_wrapper }>
-                    {
-                        pokemon.length > 0 &&
-                            pokemon.map(item => (
-                                <CardMain key={ item.name } name={ item.name }/>
-                            ))
-                    }
-                </section>
-                <section className={ styles.Main_NextPage }>
-                    {
-                        pokemon.length > 1 &&
-                            <button type='button' onClick={ handleNextPage }>View more</button>
-                    }
-                </section>
+            <main className={ styles.Main }>   
+                {
+                    isError
+                    ?   <h1>Something was wrong¡¡</h1>
+                    :
+                        <>
+                        <section className={ styles.Main_wrapper }>
+                            {
+                                pokemon.length > 0 &&
+                                    pokemon.map(item => (
+                                        <CardMain key={ item.name } name={ item.name }/>
+                                    ))
+                            }
+                        </section>
+                        <section className={ styles.Main_NextPage }>
+                            {
+                                pokemon.length > 1 &&
+                                    <button type='button' onClick={ handleNextPage }>View more</button>
+                            }
+                        </section>
+                        </>
+                }      
             </main>
         </section>
     )

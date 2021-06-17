@@ -38,7 +38,7 @@ const Detail = () => {
     }
 
     useEffect(() => {
-        getDataByName()
+        getDataByName() // eslint-disable-next-line 
     },[])
 
     return(
