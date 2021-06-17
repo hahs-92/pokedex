@@ -51,7 +51,6 @@ const Home = () => {
     return(
         <section className={ styles.Home }>
             <Header />
-
             <section className={ styles.Search }>
                 <div className={ styles.Search_wrapper }>
                     <input className={ styles.Input } onChange={ handleOnChange } type="text" placeholder='Search by name' />
@@ -63,7 +62,6 @@ const Home = () => {
                     </div>
                 }
             </section>
-
             <main className={ styles.Main }>   
                 {
                     isError
