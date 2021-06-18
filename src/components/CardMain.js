@@ -37,7 +37,7 @@ const CardMain = ({ name }) => {
         if(isError) return false
         history.push(`/Pokemon/${ name }`)
     }
-
+    //SE HACE EL LLAMADO A LA API SOLO CUANDO LA TARJETA SEA VISIBLE POR EL USUSARIO
     useEffect(() => {
         getImgPokemon() // eslint-disable-next-line
     }, [ show ])

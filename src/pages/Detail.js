@@ -9,19 +9,8 @@ import CardDetail from '../components/CardDetail'
 import { getDataByName } from '../utils/getData'
 
 const Detail = () => {
-    // const BASEURL = "https://pokeapi.co/api/v2/"
     let { name } = useParams()
     const [ pokemon, setPokemon ] = useState()
-
-    // const getData= async() => {
-    //     try {
-    //         const data = await fetch(`${ BASEURL }pokemon/${ name }`)
-    //         const response = await data.json()
-    //         setPokemon(response)
-    //     } catch (error) {
-    //         console.log(error.message)
-    //     }
-    // }
 
     const getData= async() => {
         try {

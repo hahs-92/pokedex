@@ -24,7 +24,7 @@
 .Imagen img {
     width: 80%;
     max-width: 250px;
-    animation: fadeIn 3s ease-in-out;
+    animation: fadeIn .3s ease-in-out;
 }
 
 .Title {
@@ -45,7 +45,7 @@
 @keyframes fadeIn {
     from {
         opacity: 0;
-        transform: scale(0);
+        transform: scale(0.5);
     }
 
     to {

@@ -25,7 +25,7 @@ const Home = () => {
             setIsError(true)
         }
     }
-
+    
     const handleNextPage = () => {
         setPage(page + 1 )
     }
@@ -35,14 +35,15 @@ const Home = () => {
     }
 
     const handleSearch = () => {
+        //SI EL INPUT ESTA VACIO 
         if(!filter){
             setNotFound(true)
             return false
         }
-        setPokemon([{ name: filter }])
+        setPokemon([{ name: filter.toLowerCase() }])
         setNotFound(false)
     }
-
+    //CADA VEZ QUE EL NUMERO DE LA PAGINA CAMBIA SE HACE UN NUEVO LLAMDADO
     useEffect(() => {
         getPokemons() // eslint-disable-next-line
     },[page])
