@@ -66,7 +66,7 @@ const CardMain = ({ name }) => {
                                     : 
                                     <section className={ styles.Error }>
                                         <img src={ imgError } alt="notfound" style={ { width:"100%", height:"100%"}}/>
-                                        <h1>Something was wrong¡¡</h1>
+                                        <h2>Something went wrong¡¡</h2>
                                     </section>
                                 }        
                             </>

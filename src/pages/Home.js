@@ -37,6 +37,7 @@ const Home = () => {
     const handleSearch = () => {
         if(!filter){
             setNotFound(true)
+            return false
         }
         setPokemon([{ name: filter }])
         setNotFound(false)
@@ -63,13 +64,13 @@ const Home = () => {
             <main className={ styles.Main }>   
                 {
                     isError
-                    ?   <h1>Something was wrong¡¡</h1>
+                    ?   <h1>Something went wrong¡¡</h1>
                     :
                         <section className={ styles.Main_wrapper }>
                             {
                                 pokemon.length > 0 &&
                                     pokemon.map(item => (
-                                        <CardMain key={ item.name } name={ item.name }/>
+                                        <CardMain key={ `${ item.name }${ page }` } name={ item.name }/>
                                     ))
                             }
                         </section>

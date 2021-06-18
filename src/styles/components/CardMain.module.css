@@ -38,6 +38,9 @@
     color: var(--white);
 }
 
+.Error h2 {
+    text-align: center;
+}
 
 @keyframes fadeIn {
     from {
