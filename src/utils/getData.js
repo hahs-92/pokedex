@@ -1,5 +1,5 @@
 const BASEURL = "https://pokeapi.co/api/v2/"
-const LIMIT = 10
+const LIMIT = 30
 
 export const getDataByName = async(name) => {
     try {   

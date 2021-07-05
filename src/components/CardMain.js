@@ -1,5 +1,5 @@
 import { useHistory } from 'react-router-dom'
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useState, useRef, useCallback, useContext } from 'react'
 //ESTILOS
 import styles from '../styles/components/CardMain.module.css'
 //IMAGES
@@ -10,8 +10,11 @@ import Loader from '../components/Loader'
 import { useIntersectionObserver } from '../hooks/useIntersectionOberver'
 //UTILS
 import { getDataByName } from '../utils/getData'
+//CONTEXT
+import { AppContext } from '../context/AppContext'
 
 const CardMain = ({ name }) => {
+    const { setIsSearch } = useContext(AppContext)
     let history = useHistory()
     const element = useRef(null)
     const [ imgPokemon, setImgPokemon ] = useState('')
@@ -19,7 +22,7 @@ const CardMain = ({ name }) => {
     const [ isError, setError ] = useState(false)
     const { show } = useIntersectionObserver(element)
 
-    const getImgPokemon = async() => {
+    const getImgPokemon = useCallback ( async() => {
         setIsLoading(true)
         try {   
             if(!show) return false  
@@ -31,10 +34,11 @@ const CardMain = ({ name }) => {
             setIsLoading(false)
             setError(true)
         }
-    }
+    },[name, show])
 
     const handleOnClick = () => {
         if(isError) return false
+        setIsSearch(false)
         history.push(`/Pokemon/${ name }`)
     }
     //SE HACE EL LLAMADO A LA API SOLO CUANDO LA TARJETA SEA VISIBLE POR EL USUSARIO

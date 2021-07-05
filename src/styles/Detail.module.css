@@ -21,7 +21,7 @@
     width: 100%;
 }
 
-.Button a {
+.Button button {
     display: flex;
     align-items: center;
     justify-content: center;

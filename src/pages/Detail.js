@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { useParams, useHistory } from 'react-router-dom'
 //ESTILOS
 import styles from '../styles/Detail.module.css'
 //COMPONENTS
@@ -10,6 +10,7 @@ import { getDataByName } from '../utils/getData'
 
 const Detail = () => {
     let { name } = useParams()
+    let history = useHistory()
     const [ pokemon, setPokemon ] = useState()
 
     const getData= async() => {
@@ -19,6 +20,10 @@ const Detail = () => {
         } catch (error) {
             console.log(error.message)
         }
+    }
+
+    const handleHistory = () => {
+        history.goBack()
     }
 
     useEffect(() => {
@@ -31,8 +36,8 @@ const Detail = () => {
             <Header />
             
             <div className={ styles.Detail_wrapper }>
-                <section className={ styles.Button }>
-                    <Link to= '/'>Back</Link>
+                <section className={ styles.Button } onClick={ handleHistory }>
+                   <button type='button' aria-label='back-button' >Back</button>
                 </section>
 
                 <section className={ styles.Content }>

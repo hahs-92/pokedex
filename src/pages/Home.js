@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
 //ESTILOS
 import styles from '../styles/Home.module.css'
 //COMPONENTS
@@ -6,19 +6,20 @@ import Header from '../components/Header'
 import CardMain from '../components/CardMain'
 //UTILS
 import { getData } from '../utils/getData'
+//CONTEXT
+import { AppContext } from '../context/AppContext'
 
 const Home = () => {
-    const [ pokemon, setPokemon ] = useState([])
-    const [ page, setPage ] = useState(0)
+    const { page, setPage, listPokemon, setlistPokemon, isSearch, setIsSearch } = useContext(AppContext)
     const [ filter, setFilter ] = useState('')
     const [ notFound, setNotFound ] = useState(false)
     const [ isError, setIsError ] = useState(false)
 
-    const getPokemons = async() => {
+    const getlistPokemons = async(page) => {
         try {
             const data = await getData(page)
-            const newData = [...pokemon, ...data.results]
-            setPokemon(newData)
+            const newData = [...listPokemon, ...data.results]
+            setlistPokemon(newData)
             setIsError(false)
         } catch (error) {
             console.log(error.message)
@@ -27,35 +28,37 @@ const Home = () => {
     }
     
     const handleNextPage = () => {
-        setPage(page + 1 )
+        setIsSearch(true)
+        setPage(page => page + 1 )
     }
 
     const handleOnChange = (e) => {
         setFilter(e.target.value)
     }
 
-    const handleSearch = () => {
+    const handleSubmit = (e) => {
+        e.preventDefault()
         //SI EL INPUT ESTA VACIO 
         if(!filter){
             setNotFound(true)
             return false
         }
-        setPokemon([{ name: filter.toLowerCase() }])
+        setlistPokemon([{ name: filter.toLowerCase() }])
         setNotFound(false)
     }
     //CADA VEZ QUE EL NUMERO DE LA PAGINA CAMBIA SE HACE UN NUEVO LLAMDADO
     useEffect(() => {
-        getPokemons() // eslint-disable-next-line
+        (isSearch) && getlistPokemons(page) // eslint-disable-next-line
     },[page])
 
     return(
         <section className={ styles.Home }>
             <Header />
             <section className={ styles.Search }>
-                <div className={ styles.Search_wrapper }>
-                    <input className={ styles.Input } onChange={ handleOnChange } type="text" placeholder='Search by name' />
-                    <input className={ styles.Button } onClick={ handleSearch } type="button" value='Search' />
-                </div>
+                <form className={ styles.Search_wrapper } onSubmit={ handleSubmit } >
+                    <input className={ styles.Input } value={ filter } onChange={ handleOnChange } type="text" placeholder='Search by name' />
+                    <input className={ styles.Button }  type="submit" value='Search' />
+                </form>
                 { notFound &&
                     <div className={ styles.Alert }>
                         <h3>Enter a name, please¡¡</h3>
@@ -69,8 +72,8 @@ const Home = () => {
                     :
                         <section className={ styles.Main_wrapper }>
                             {
-                                pokemon.length > 0 &&
-                                    pokemon.map(item => (
+                                listPokemon.length > 0 &&
+                                    listPokemon.map(item => (
                                         <CardMain key={ `${ item.name }${ page }` } name={ item.name }/>
                                     ))
                             }
@@ -79,7 +82,7 @@ const Home = () => {
             </main>
             <section className={ styles.Main_NextPage }>
                 {
-                    pokemon.length > 1 &&
+                    listPokemon.length > 1 &&
                         <button type='button' aria-label='button-next' onClick={ handleNextPage }>View more</button>
                 }
             </section>

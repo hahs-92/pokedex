@@ -9,7 +9,7 @@ export const useIntersectionObserver = ( element ) => {
                 setShow(true)
                 observer.disconnect()
             }
-        },{ rootMargin:'10px'} )
+        },{ rootMargin:'100px'} )
         observer.observe(element.current)
     }, [element])
 
