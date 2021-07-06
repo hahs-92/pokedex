@@ -26,7 +26,7 @@ const Home = () => {
             setIsError(true)
         }
     }
-    
+
     const handleNextPage = () => {
         setIsSearch(true)
         setPage(page => page + 1 )
@@ -73,8 +73,8 @@ const Home = () => {
                         <section className={ styles.Main_wrapper }>
                             {
                                 listPokemon.length > 0 &&
-                                    listPokemon.map(item => (
-                                        <CardMain key={ `${ item.name }${ page }` } name={ item.name }/>
+                                    listPokemon.map((item,index) => (
+                                        <CardMain key={ `${ item.name }${index}` } name={ item.name }/>
                                     ))
                             }
                         </section>
@@ -82,7 +82,7 @@ const Home = () => {
             </main>
             <section className={ styles.Main_NextPage }>
                 {
-                    listPokemon.length > 1 &&
+                    listPokemon.length >= 1 &&
                         <button type='button' aria-label='button-next' onClick={ handleNextPage }>View more</button>
                 }
             </section>

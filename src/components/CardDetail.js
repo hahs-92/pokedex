@@ -1,6 +1,9 @@
 //ESTILOS
 import styles from '../styles/components/CardDetail.module.css'
 const CardDetail = (props) => {
+    const abilities = props.abilities.map(item => item.ability.name)
+    const types = props.types.map(item => item.type.name)
+
     return(
         <article className={ styles.CardDetail }>
             <div className={ styles.CardDetail_wrapper }>
@@ -12,20 +15,10 @@ const CardDetail = (props) => {
                     <h2><strong>Id: </strong>{ props.id }</h2>
                     <h2><strong>Name: </strong>{ props.name }</h2>
                     <h2><strong>Types: </strong>
-                        {
-                            props.types && 
-                                props.types.map(item => (
-                                    <span key={ item.type.name }>{ item.type.name }  </span>
-                                ))
-                        }
+                        { types.join(', ')}
                     </h2>
                     <h2><strong>Abilities: </strong>
-                        {
-                            props.abilities && 
-                                props.abilities.map(item => (
-                                    <span key={ item.ability.name }>{ item.ability.name }  </span>
-                                ))
-                        }
+                        { abilities.join(', ')}
                     </h2>
                 </section>
             </div>

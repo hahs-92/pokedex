@@ -83,4 +83,5 @@
     font-family: var(--fontFamily);
     font-size: 1.8rem;
     outline: none;
+    cursor: pointer;
 }

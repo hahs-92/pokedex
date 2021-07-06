@@ -1,5 +1,6 @@
+import React from 'react'
 import { useHistory } from 'react-router-dom'
-import { useEffect, useState, useRef, useCallback, useContext } from 'react'
+import { useEffect, useState, useRef, useContext } from 'react'
 //ESTILOS
 import styles from '../styles/components/CardMain.module.css'
 //IMAGES
@@ -22,7 +23,7 @@ const CardMain = ({ name }) => {
     const [ isError, setError ] = useState(false)
     const { show } = useIntersectionObserver(element)
 
-    const getImgPokemon = useCallback ( async() => {
+    const getImgPokemon = async() => {
         setIsLoading(true)
         try {   
             if(!show) return false  
@@ -34,7 +35,7 @@ const CardMain = ({ name }) => {
             setIsLoading(false)
             setError(true)
         }
-    },[name, show])
+    }
 
     const handleOnClick = () => {
         if(isError) return false
