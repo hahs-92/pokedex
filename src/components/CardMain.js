@@ -19,17 +19,18 @@ const CardMain = ({ name }) => {
     const { setIsSearch } = useContext(AppContext)
     let history = useHistory()
     const element = useRef(null)
-    const [ imgPokemon, setImgPokemon ] = useState('')
+    const [ pokemon, setPokemon ] = useState([])
     const [ isLoading, setIsLoading ] = useState(false)
     const [ isError, setError ] = useState(false)
     const { show } = useIntersectionObserver(element)
 
-    const getImgPokemon = async() => {
+    const getImgPokemon = async(query) => {
         setIsLoading(true)
         try {   
             if(!show) return false  
-            const data = await getDataByName(name)
-            setImgPokemon( data.sprites.other["official-artwork"].front_default)
+            const data = await getDataByName(query)
+            const { name , sprites:{ other } } = await data
+            setPokemon([name, other['official-artwork'].front_default])
             setIsLoading(false)
             setError(false)
         } catch (error) {
@@ -45,7 +46,7 @@ const CardMain = ({ name }) => {
     }
     //SE HACE EL LLAMADO A LA API SOLO CUANDO LA TARJETA SEA VISIBLE POR EL USUSARIO
     useEffect(() => {
-        getImgPokemon() // eslint-disable-next-line
+        getImgPokemon(name) // eslint-disable-next-line
     }, [ show ])
 
     return(
@@ -58,15 +59,15 @@ const CardMain = ({ name }) => {
                         ? 
                             <>   
                                 {
-                                    imgPokemon || !isError
+                                    pokemon.length > 0 && !isError
                                     ? 
                                     <>
                                         <section className={ styles.Imagen }>
-                                            <img src={ imgPokemon } alt={ `pokemon ${ name }`} title={ name }/>
+                                            <img src={ pokemon[1] } alt={ `pokemon ${ name }` } title={ name }  />
                                         </section>
 
                                         <section className={ styles.Title }>
-                                            <h2>{ name }</h2>
+                                            <h2>{ pokemon[0] } </h2>
                                         </section> 
                                     </>
                                     : 

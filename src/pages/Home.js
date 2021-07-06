@@ -56,7 +56,7 @@ const Home = () => {
             <Header />
             <section className={ styles.Search }>
                 <form className={ styles.Search_wrapper } onSubmit={ handleSubmit } >
-                    <input className={ styles.Input } value={ filter } onChange={ handleOnChange } type="text" placeholder='Search by name' />
+                    <input className={ styles.Input } value={ filter } onChange={ handleOnChange } type="text" placeholder='Search by name or Id...' />
                     <input className={ styles.Button }  type="submit" value='Search' />
                 </form>
                 { notFound &&
