@@ -1,6 +1,7 @@
 import React from 'react'
 import { useHistory } from 'react-router-dom'
 import { useEffect, useState, useRef, useContext } from 'react'
+import PropTypes from 'prop-types'
 //ESTILOS
 import styles from '../styles/components/CardMain.module.css'
 //IMAGES
@@ -61,7 +62,7 @@ const CardMain = ({ name }) => {
                                     ? 
                                     <>
                                         <section className={ styles.Imagen }>
-                                            <img src={ imgPokemon } alt={ `pokemon ${ name }`} />
+                                            <img src={ imgPokemon } alt={ `pokemon ${ name }`} title={ name }/>
                                         </section>
 
                                         <section className={ styles.Title }>
@@ -82,6 +83,10 @@ const CardMain = ({ name }) => {
             }
         </article>  
     )
+}
+
+CardMain.propTypes = {
+    name: PropTypes.string.isRequired
 }
 
 export default CardMain
