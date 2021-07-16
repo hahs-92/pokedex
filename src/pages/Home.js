@@ -3,7 +3,7 @@ import { useEffect, useState, useContext } from 'react'
 import styles from '../styles/Home.module.css'
 //COMPONENTS
 import Header from '../components/Header'
-import CardMain from '../components/CardMain'
+import ListCardMain from '../components/ListCardMain'
 //UTILS
 import { getData } from '../utils/getData'
 //CONTEXT
@@ -69,15 +69,15 @@ const Home = () => {
                 {
                     isError
                     ?   <h1>Something went wrong¡¡</h1>
-                    :
-                        <section className={ styles.Main_wrapper }>
-                            {
-                                listPokemon.length > 0 &&
-                                    listPokemon.map((item,index) => (
-                                        <CardMain key={ `${ item.name }${index}` } name={ item.name }/>
-                                    ))
-                            }
-                        </section>
+                    : <ListCardMain />
+                        // <section className={ styles.Main_wrapper }>
+                        //     {
+                        //         listPokemon.length > 0 &&
+                        //             listPokemon.map((item,index) => (
+                        //                 <CardMain key={ `${ item.name }${index}` } name={ item.name }/>
+                        //             ))
+                        //     }
+                        // </section>
                 }      
             </main>
             <section className={ styles.Main_NextPage }>
