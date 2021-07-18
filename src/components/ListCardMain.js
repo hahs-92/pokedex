@@ -6,14 +6,23 @@ import styles from '../styles/components/ListCardMain.module.css'
 //CONTEXT
 import { AppContext } from '../context/AppContext'
 
+
 const ListCardMain = () => {
-    const { listPokemon } = useContext(AppContext)
+    const { pokemons } = useContext(AppContext)
+    
     return (
         <section className={ styles.ListCardMain }>
             {
-                listPokemon.length > 0 &&
-                    listPokemon.map((item,index) => (
-                        <CardMain key={ `${ item.name }${index}` } name={ item.name }/>
+                pokemons.length > 0 &&
+                    pokemons.map((item, index) => (
+                        <CardMain  
+                            key={ `${ item.id } ${ index }` } 
+                            id={ item.id }
+                            name={ item.name } 
+                            image={ item.image } 
+                            types={ item.types } 
+                            abilities={ item.abilities }
+                        />
                     ))
             }
         </section>
