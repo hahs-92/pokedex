@@ -3,17 +3,12 @@ import { useRef } from 'react'
 import PropTypes from 'prop-types'
 //ESTILOS
 import styles from '../styles/components/CardMain.module.css'
-//COMPONENTES
-import Modal from './Modal'
-import CardDetail from './CardDetail'
 //HOOKS
 import { useIntersectionObserver } from '../hooks/useIntersectionOberver'
-import { useModal }from '../hooks/useModal'
 
-const CardMain = ({ id, name, image, types, abilities }) => {
+const CardMain = ({ id, name, image, types, abilities, handleOpenModal, handleValues }) => {
     const element = useRef(null)
     const { show } = useIntersectionObserver(element)
-    const { openModal, isOpen, closeModal } = useModal(false) 
 
     const myStyles = {
         normal: '#9e9e9e',
@@ -36,14 +31,20 @@ const CardMain = ({ id, name, image, types, abilities }) => {
         dark: '#009688'
     }
 
-
     const handleOnClick = () => {
-        openModal()
+        const values = {
+            id,
+            name,
+            image,
+            types,
+            abilities,
+            BG: `${ myStyles[types[0].type.name] }`
+        }
+        handleValues(values)
+        handleOpenModal()
     }
-    console.log(types[0].type.name)
 
     return(
-        <>
             <article className={ styles.CardMain  } onClick={ handleOnClick } ref={ element }>
             {
                 show &&
@@ -58,19 +59,6 @@ const CardMain = ({ id, name, image, types, abilities }) => {
                 </>
             }
             </article>  
-
-            <Modal isOpen={ isOpen } handleModal={ closeModal}>
-                <CardDetail 
-                     id={ id }
-                     name={ name } 
-                     image={  image } 
-                     types={  types } 
-                     abilities={ abilities }
-                     BG={ `${ myStyles[types[0].type.name] }`}
-                />
-            </Modal>
-        </>
-
         )
     }
         
