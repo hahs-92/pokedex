@@ -3,6 +3,8 @@ import { useRef } from 'react'
 import PropTypes from 'prop-types'
 //ESTILOS
 import styles from '../styles/components/CardMain.module.css'
+//IMAGES
+import imgError from '../assets/error.svg'
 //HOOKS
 import { useIntersectionObserver } from '../hooks/useIntersectionOberver'
 
@@ -50,7 +52,7 @@ const CardMain = ({ id, name, image, types, abilities, handleOpenModal, handleVa
                 show &&
                 <>        
                         <section className={ styles.Imagen }>
-                            <img src={ image } alt={ `pokemon ${ name }` } title={ name }  />
+                            <img src={ image || imgError } alt={ `pokemon ${ name }` } title={ name }  />
                         </section>
 
                         <section style={ { backgroundColor:` ${ myStyles[types[0].type.name]}`}} className={ styles.Title }>
@@ -66,7 +68,7 @@ const CardMain = ({ id, name, image, types, abilities, handleOpenModal, handleVa
 CardMain.propTypes = {
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
-    image: PropTypes.string.isRequired,
+    image: PropTypes.string,
     types: PropTypes.array.isRequired,
     abilities: PropTypes.array.isRequired
 }

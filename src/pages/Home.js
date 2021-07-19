@@ -50,7 +50,7 @@ const Home = () => {
             </main>
             <section className={ styles.Main_NextPage }>
                 {
-                    pokemons.length >= 1 &&
+                    pokemons.length >= 1 && page < 37 &&
                     <button type='button' aria-label='button-next' onClick={ handleNextPage }>View more</button>
                 }
             </section>
