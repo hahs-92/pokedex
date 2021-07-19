@@ -38,9 +38,9 @@
     width: 40px;
     height: 40px;
     align-self: flex-end;
-    border: none;
-    background-color: var(--green);
-    color: var(--white);
+    background-color: transparent;
+    border: 1px solid black;
+    color: black;
     border-radius: 5px;
     cursor: pointer;
 }

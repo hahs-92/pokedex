@@ -13,12 +13,34 @@ import { useModal }from '../hooks/useModal'
 const CardMain = ({ id, name, image, types, abilities }) => {
     const element = useRef(null)
     const { show } = useIntersectionObserver(element)
-
     const { openModal, isOpen, closeModal } = useModal(false) 
+
+    const myStyles = {
+        normal: '#9e9e9e',
+        water: '#2196F3',
+        fire: '#C62828',
+        bug: '#8BC34A',
+        grass: '#4CAF50',
+        flying: '#9E9E9E',
+        ground: '#FF5722',
+        fairy: '#4DD0E1',
+        fighting: '#FF8F00',
+        psychic: '#AB47BC',
+        ice: '#00BCD4',
+        electric: '#CDDC39',
+        steel: '#78909C',
+        rock: '#795548',
+        ghost: '#311B92',
+        dragon: '#d32f2f',
+        poison: '#673AB7',
+        dark: '#009688'
+    }
+
 
     const handleOnClick = () => {
         openModal()
     }
+    console.log(types[0].type.name)
 
     return(
         <>
@@ -30,7 +52,7 @@ const CardMain = ({ id, name, image, types, abilities }) => {
                             <img src={ image } alt={ `pokemon ${ name }` } title={ name }  />
                         </section>
 
-                        <section className={ styles.Title }>
+                        <section style={ { backgroundColor:` ${ myStyles[types[0].type.name]}`}} className={ styles.Title }>
                             <h2>{ name } </h2>
                         </section> 
                 </>
@@ -44,6 +66,7 @@ const CardMain = ({ id, name, image, types, abilities }) => {
                      image={  image } 
                      types={  types } 
                      abilities={ abilities }
+                     BG={ `${ myStyles[types[0].type.name] }`}
                 />
             </Modal>
         </>

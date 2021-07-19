@@ -2,12 +2,12 @@ import PropTypes from 'prop-types'
 //ESTILOS
 import styles from '../styles/components/CardDetail.module.css'
 
-const CardDetail = ({id, name, image,abilities, types }) => {
+const CardDetail = ({id, name, image,abilities, types, BG }) => {
     const abilitiesArray = abilities.map(item => item.ability.name)
     const typesArray = types.map(item => item.type.name)
 
     return(
-        <article className={ styles.CardDetail }>
+        <article className={ styles.CardDetail } style={ { backgroundColor: BG }}>
             <div className={ styles.CardDetail_wrapper }>
                 <section className={ styles.Imagen }>
                     <img src={ image } alt={ `pokemon-${ name }`} title={ name }/>
