@@ -45,7 +45,7 @@ const Home = () => {
                 </form>
             </section>
             <main className={ styles.Main }>   
-               { error && <h1>Something was wrong¡¡</h1>}
+               { error && <h1>Something went wrong¡¡</h1>}
                <ListCardMain />
             </main>
             <section className={ styles.Main_NextPage }>
