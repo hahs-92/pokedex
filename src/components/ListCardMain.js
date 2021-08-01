@@ -1,12 +1,11 @@
-import { useContext, useState } from 'react'
+import {  useState } from 'react'
+import { useSelector } from 'react-redux'
 //COMPONENTS    
 import CardMain from './CardMain'
 import CardDetail from './CardDetail'
 import Modal from './Modal'
 //ESTILOS
 import styles from '../styles/components/ListCardMain.module.css'
-//CONTEXT
-import { AppContext } from '../context/AppContext'
 //HOOKS
 import { useModal } from '../hooks/useModal'
 
@@ -20,7 +19,7 @@ const valuesInitial = {
 }
 
 const ListCardMain = () => {
-    const { pokemons } = useContext(AppContext)
+    const pokemons = useSelector(state => state.pokemons)
     const { openModal, isOpen, closeModal } = useModal(false) 
     const [ values, setValues ] = useState(valuesInitial)
 

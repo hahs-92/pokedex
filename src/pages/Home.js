@@ -1,33 +1,44 @@
-import { useState, useContext } from 'react'
+import { useState, useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 //ESTILOS
 import styles from '../styles/Home.module.css'
 //COMPONENTS
 import Header from '../components/Header'
 import ListCardMain from '../components/ListCardMain'
-//CONTEXT
-import { AppContext } from '../context/AppContext'
+import Loader from '../components/Loader'
+//actions creators
+import { changePage, getPokemon  } from '../actions/poke'
 
 const Home = () => {
-    const { page, setPage, pokemons, error, setQuery, loading } = useContext(AppContext)
     const [ filter, setFilter ] = useState('')
 
+    const page = useSelector(state => state.page)
+    const loading = useSelector(state => state.loading)
+    const pokemons = useSelector(state => state.pokemons)
+    const error = useSelector(state => state.error)
+    const dispatch = useDispatch() 
+
     const handleNextPage = () => {
-        setPage( page + 1)
+        dispatch(changePage(page + 1))
     }
 
     const handleOnChange = (e) => {
-        setFilter(e.target.value)
+        const value = e.target.value.toLowerCase()
+        setFilter(value)
     }
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        //SI EL INPUT ESTA VACIO 
+        // SI EL INPUT ESTA VACIO 
         if(!filter){
             return false
         }
-        setQuery(filter)
-        setPage(page + 1)
+        dispatch(getPokemon(filter))
     }
+
+    useEffect(() => {
+        dispatch(changePage(page)) // eslint-disable-next-line
+    },[])
 
     return(
         <section className={ styles.Home }>
@@ -41,12 +52,19 @@ const Home = () => {
                         type="text" placeholder='Search by name or Id...' 
                         required
                     />
-                    <input className={ styles.Button }  type="submit" value={ loading ? 'Loading...' : 'Search' } />
+                    <input 
+                        className={ styles.Button }  
+                        type="submit" 
+                        value={ loading ? 'Loading... ' : 'Search' } 
+                    />
                 </form>
             </section>
-            <main className={ styles.Main }>   
-               { error && <h1>Something went wrong¡¡</h1>}
+            <main className={ styles.Main }> 
+                { error && 
+                    <h1 style={ { width:"90%", height:"60px", color:"tomato"}}>Something went wrong¡¡</h1>
+                }
                <ListCardMain />
+               { loading && <section style={ { width:"100%", textAlign:"center" }}><Loader /></section> }
             </main>
             <section className={ styles.Main_NextPage }>
                 {
